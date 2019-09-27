@@ -1,0 +1,26 @@
+// Psudocode
+input two string (full_string, pattern이라 부르자)
+fs_length = full_string.length()
+pattern_length = pattern.length()
+locate = list()
+for i in (list of numbers from 0 to fs_length-pattern_length){
+    is_here=true
+    for j in (list of numbers from 0 to pattern_length-1){
+        if(full_string[i+j]!=pattern[j]){
+            is_here=false
+            break
+        }
+    }
+    if(is_here){
+        locate.push(i)
+    }
+}
+if(locate.empty()){
+    print full_string + "에 " + pattern + "이 없습니다 ㅠㅠ"
+} else {
+    for i in locate{
+        print i
+		if i is not (size of locate)-1, print ","
+    }
+    print "번째에 존재합니다."
+}

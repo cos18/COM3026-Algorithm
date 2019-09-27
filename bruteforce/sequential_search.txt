@@ -1,0 +1,19 @@
+// Psudocode
+input list of numbers (A라 하자)
+input number (find라 하자)
+make empty list (locate라 하자)
+for i in (list of numbers from 0 to (size of A)-1)
+{
+	if A[i] is number, insert i at locate
+}
+if locate is empty, print "찾을 수 없습니다!"
+else
+{
+	print "값이 있습니다!"
+	for i in (list of numbers from 0 to (size of locate)-1)
+	{
+		print i
+		if i is not (size of locate)-1, print ","
+	}
+	print "번쨰에 존재합니다."
+}
