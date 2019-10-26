@@ -1,90 +1,73 @@
-word_list = []
-noun = []               #명사
-pronoun = []            #대명사
-numnoun = []            #수사
-postposition = []       #조사
-help_postposition = []  #보조사
+class Transform:
 
-def Transform(word):
+    word = ''
 
-    #전역 변수 선언
-    global word_list
-    global noun
-    global pronoun
-    global numnoun
-    global postposition
-    global help_postposition
-
-    word_len = len(word)
+    def __init__(self, word_list):
+        self.word_list = word_list
+        self.noun = []               #명사
+        self.pronoun = []            #대명사
+        self.numnoun = []            #수사
+        self.postposition = []       #조사
+        self.help_postposition = []  #보조사
+        self.classify()
     
-    def classify():
+    def classify(self):
+        josa_one = ['에', '로', '께', '와', '과', '고']
+        josa_two = ['에서', '에게', '한테', '으로', '더러', \
+            '보고', '로서', '처럼', '만큼', '같이' '보다', '라고']
+        josa_three = ['에게서', '에게로', '한테로', '으로서', '으로써']
 
-        #부사격 조사 1글자 짜리
-        if (word[word_len-1] == '에' or word[word_len-1] == '로' or \
-            word[word_len-1] == '께' or word[word_len-1] == '와' or \
-            word[word_len-1] == '과' or word[word_len-1] == '고'):
-            check_expection_one()
-
-
-        #부사격 조사 2글자 짜리
-        elif (word[word_len-2:] == '에서' or word[word_len-2:] == '에게' or \
-              word[word_len-2:] == '한테' or word[word_len-2:] == '으로' or \
-              word[word_len-2:] == '더러' or word[word_len-2:] == '보고' or \
-              word[word_len-2:] == '로서' or word[word_len-2:] == '처럼' or \
-              word[word_len-2:] == '처럼' or word[word_len-2:] == '만큼' or \
-              word[word_len-2:] == '같이' or word[word_len-2:] == '보다' or \
-              word[word_len-2:] == '라고'):
-            append_two()
-
-        #부사격 조사 3글자 짜리
-        elif ( word[word_len-3:] == '에게서' or word[word_len-3:] == '에게로'\
-               or word[word_len-3:] == '한테로' or word[word_len-3:] == '으로서'\
-               or word[word_len-3:] == '으로써'):
-            append_three()
+        for w in self.word_list:
+            self.word = w
+            if (len(w)>0 and (self.word[-1] in josa_one)):
+                self.check_expection_one()
+            elif (len(w)>1 and (self.word[-2:] in josa_two)):
+                self.append_two()
+            elif (len(w)>2 and (self.word[-3:] in josa_three)):
+                self.append_three()
 
     # 조사 한글자일때 예외
-    def check_expection_one():
-        if word == '창고' or word == '사고':
-            noun.append(word)
+    def check_expection_one(self):
+        if self.word == '창고' or self.word == '사고':
+            self.noun.append(self.word)
         else :
-            append_one()
+            self.append_one()
 
     #조사 한글자일때
-    def append_one():
-        num = check_pronoun_numnoun(word[:word_len-1])
+    def append_one(self):
+        num = self.check_pronoun_numnoun(self.word[:-1])
+        print(num)
         if (num == 1):
-            pronoun.append(word[:word_len-1])
+            self.pronoun.append(self.word[:-1])
         elif (num == 2):
-            numnoun.append(word[:word_len-1])
+            self.numnoun.append(self.word[:-1])
         else:
-            noun.append(word[:word_len-1])
-        postposition.append(word[word_len-1:])
+            self.noun.append(self.word[:-1])
+        self.postposition.append(self.word[-1:])
 
     #조사 두글자일때
-    def append_two():
-        num = check_pronoun_numnoun(word[:word_len-2])
+    def append_two(self):
+        num = self.check_pronoun_numnoun(self.word[:-2])
         if (num == 1):
-            pronoun.append(word[:word_len-2])
+            self.pronoun.append(self.word[:-2])
         elif (num == 2):
-            numnoun.append(word[:word_len-2])
+            self.numnoun.append(self.word[:-2])
         else:
-            noun.append(word[:word_len-2])
-        postposition.append(word[word_len-2:])
+            self.noun.append(self.word[:-2])
+        self.postposition.append(self.word[-2:])
         
     #조사 세글자일때
-    def append_three():
-        num = check_pronoun_numnoun(word[:word_len-3])
+    def append_three(self):
+        num = self.check_pronoun_numnoun(self.word[:-3])
         if (num == 1):
-            pronoun.append(word[:word_len-3])
+            self.pronoun.append(self.word[:-3])
         elif (num == 2):
-            numnoun.append(word[:word_len-3])
+            self.numnoun.append(self.word[:-3])
         else:
-            noun.append(word[:word_len-3])
-        postposition.append(word[word_len-3:])
+            self.noun.append(self.word[:-3])
+        self.postposition.append(self.word[-3:])
 
-
-    
-    def check_pronoun_numnoun(a):
+    def check_pronoun_numnoun(self, a):
         #대명사
         if (a == "나" or a == "저" or a == "우리" or a == "저희" or a == "너" \
             or a == "자네" or a == "당신" or a == "그대" or a == "너희" \
@@ -103,22 +86,16 @@ def Transform(word):
         else :
             return
 
-
-            
-    word_list.append(word)
-    classify()
-
-
-
-def show_word():
-    print("입력된 단어 : ", word_list)
-    print(" 명사 : ", noun)
-    print(" 대명사 :" , pronoun)
-    print(" 수사 :",numnoun)
-    print(" 조사 : ", postposition)
-    print(" 보조사 : ", help_postposition)
+    def show_word(self):
+        print("입력된 단어 : ", self.word_list)
+        print(" 명사 : ", self.noun)
+        print(" 대명사 :" , self.pronoun)
+        print(" 수사 :",self.numnoun)
+        print(" 조사 : ", self.postposition)
+        print(" 보조사 : ", self.help_postposition)
 
 
+'''
 Transform("나에")
 Transform("나무에")
 Transform("하나에")
@@ -131,3 +108,4 @@ Transform("그곳에게서")
 
 
 show_word()
+'''

@@ -1,18 +1,20 @@
-def blank(InputArray):
-    NWord = 0
-    Wordarray = ['']
-    for i in InputArray:
+def blank(sentence):
+    index = 0
+    word = ['']
+    for i in sentence:
         if("가"<=i<="힣"):
-            Wordarray[NWord] = Wordarray[NWord]+i
+            word[index] = word[index]+i
         elif("A">=i>="z"):
-            Wordarray[NWord] = Wordarray[NWord]+i
+            word[index] = word[index]+i
         elif("9">=i>="0"):
-            Wordarray[NWord] = Wordarray[NWord]+i
+            word[index] = word[index]+i
         else:
-            NWord = NWord +1
-            Wordarray.append("")
-    return Wordarray  
+            index = index +1
+            word.append("")
+    return word  
 
-Array = input ("문장 입력")
-Wordarray = blank(Array)
-print(Wordarray)
+'''
+Array = input ("문장 입력 ->")
+word = blank(Array)
+print(word)
+'''
