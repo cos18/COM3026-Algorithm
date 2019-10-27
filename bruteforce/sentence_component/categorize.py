@@ -14,7 +14,7 @@ class Transform:
         self.preamal=[]              #선어말어미
         self.endword=[]              #종결어미
         self.connection=[]           #연결어미
-        self.verv=[]                 #동사
+        self.verb=[]                 #동사
         self.ect=[]                  #기타
         self.hangul = hangul_lib.Hangul()
         self.classify()
@@ -68,7 +68,7 @@ class Transform:
     def append_verb(self, klen): #선어말이 있으면
         for m in self.hangul.preamal:
             mlen = len(m)
-            if self.word>=mlen and self.word[-mlen:] == m:
+            if len(self.word)>=mlen and self.word[-mlen:] == m:
                 self.preamal.append(self.word[-mlen:])
                 self.word=self.word[:-mlen]
                 break
