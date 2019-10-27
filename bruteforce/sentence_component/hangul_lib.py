@@ -27,4 +27,28 @@ class Hangul:
             self.numeral.append(line[0])
         f.close()
 
+        #연결어미
+        self.connection=[]
+        f = open('library/ec.csv', 'r', encoding='utf-8')
+        rdr = csv.reader(f)
+        for line in rdr:
+            self.numeral.append(line[0])
+        f.close()
+
+        #선어말어미
+        self.preamal=[]
+        f = open('library/ep.csv', 'r', encoding='utf-8')
+        rdr = csv.reader(f)
+        for line in rdr:
+            self.numeral.append(line[0])
+        f.close()
+
+        #종결어미
+        self.end=[]
+        f = open('library/ef.csv', 'r', encoding='utf-8')
+        rdr = csv.reader(f)
+        for line in rdr:
+            self.numeral.append(line[0])
+        f.close()
+
 # h = Hangul()
