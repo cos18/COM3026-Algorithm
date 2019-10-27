@@ -14,7 +14,7 @@ class Transform:
         self.preamal=[]              #선어말어미
         self.endword=[]              #종결어미
         self.connection=[]           #연결어미
-        self.verv=[]                 #동사
+        self.verb=[]                 #동사
         self.hangul = hangul_lib.Hangul()
         self.classify()
     
@@ -39,7 +39,7 @@ class Transform:
                     break
             if isVerv:
                 continue
-            for l in self.hangul.connection:
+            for l in self.hangul.endword:
                 llen = len(l)
                 if len(w)>=llen and w[-llen:]==l:
                     self.append_verb(llen)
@@ -64,7 +64,7 @@ class Transform:
                 self.preamal.append(self.word[-mlen:])
                 self.word=self.word[:-mlen]
                 break
-        self.verv.append(self.word)
+        self.verb.append(self.word)
             
 
 
@@ -75,7 +75,7 @@ class Transform:
         print(" 수사 :",self.numnoun)
         print(" 조사 : ", self.postposition)
         print(" 보조사 : ", self.help_postposition)
-        print(" 동사 : ", self.verv)
+        print(" 동사 : ", self.verb)
         print(" 선어말어미: ", self.preamal)
         print(" 연결어미: ", self.connection)
         print(" 종결어미: ", self.endword)
