@@ -11,6 +11,10 @@ class Transform:
         self.numnoun = []            #수사
         self.postposition = []       #조사
         self.help_postposition = []  #보조사
+        self.preamal=[]              #선어말어미
+        self.endword=[]              #종결어미
+        self.connection=[]           #연결어미
+        self.verv=[]                 #동사
         self.hangul = hangul_lib.Hangul()
         self.classify()
     
@@ -18,6 +22,7 @@ class Transform:
         for w in self.word_list:
             self.word = w
             isNoun = False
+            isVerv = False
             for j in self.hangul.josa:
                 jlen = len(j)
                 if len(w)>=jlen and w[-jlen:] == j:
@@ -26,6 +31,19 @@ class Transform:
                     break
             if isNoun:
                 continue
+            for k in self.hangul.connection:
+                klen = len(k)
+                if len(w)>=klen and w[-klen:]==k:
+                    self.append_verb(klen)
+                    isVerv = True
+                    break
+            if isVerv:
+                continue
+            for l in self.hangul.connection:
+                llen = len(l)
+                if len(w)>=llen and w[-llen:]==l:
+                    self.append_verb(llen)
+                    break
 
     def append_nown(self, jlen):
         if jlen==1 and (self.word == '창고' or self.word == '사고'):
@@ -39,6 +57,17 @@ class Transform:
             self.noun.append(self.word[:-jlen])
         self.postposition.append(self.word[-jlen:])
 
+    def append_verb(self, klen): #선어말이 있으면
+        for m in self.hangul.preamal:
+            mlen = len(m)
+            if self.word>=mlen and self.word[-mlen:] == m:
+                self.preamal.append(self.word[-mlen:])
+                self.word=self.word[:-mlen]
+                break
+        self.verv.append(self.word)
+            
+
+
     def show_word(self):
         print("입력된 단어 : ", self.word_list)
         print(" 명사 : ", self.noun)
@@ -46,6 +75,10 @@ class Transform:
         print(" 수사 :",self.numnoun)
         print(" 조사 : ", self.postposition)
         print(" 보조사 : ", self.help_postposition)
+        print(" 동사 : ", self.verv)
+        print(" 선어말어미: ", self.preamal)
+        print(" 연결어미: ", self.connection)
+        print(" 종결어미: ", self.endword)
 
 
 '''
