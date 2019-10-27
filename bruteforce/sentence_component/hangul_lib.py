@@ -18,7 +18,7 @@ class Hangul:
         rdr = csv.reader(f)
         for line in rdr:
             self.pronoun.append(line[0])
-        f.close() 
+        f.close()
 
         # 수사
         self.numeral=[]
