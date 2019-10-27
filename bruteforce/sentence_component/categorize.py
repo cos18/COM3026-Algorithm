@@ -15,6 +15,7 @@ class Transform:
         self.endword=[]              #종결어미
         self.connection=[]           #연결어미
         self.verv=[]                 #동사
+        self.act=[]                  #기타
         self.hangul = hangul_lib.Hangul()
         self.classify()
     
@@ -23,6 +24,7 @@ class Transform:
             self.word = w
             isNoun = False
             isVerv = False
+            isVerv2 = False
             for j in self.hangul.josa:
                 jlen = len(j)
                 if len(w)>=jlen and w[-jlen:] == j:
@@ -35,15 +37,21 @@ class Transform:
                 klen = len(k)
                 if len(w)>=klen and w[-klen:]==k:
                     self.append_verb(klen)
+                    self.connection.append(k)
                     isVerv = True
                     break
             if isVerv:
                 continue
-            for l in self.hangul.connection:
+            for l in self.hangul.endword:
                 llen = len(l)
                 if len(w)>=llen and w[-llen:]==l:
                     self.append_verb(llen)
+                    self.endword.append(l)
+                    isVerv2=True
                     break
+            if isVerv2:
+                continue
+            self.act.append(w)
 
     def append_nown(self, jlen):
         if jlen==1 and (self.word == '창고' or self.word == '사고'):
@@ -79,6 +87,7 @@ class Transform:
         print(" 선어말어미: ", self.preamal)
         print(" 연결어미: ", self.connection)
         print(" 종결어미: ", self.endword)
+        print(" 기타: ", self.act)
 
 
 '''
