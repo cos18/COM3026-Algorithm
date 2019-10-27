@@ -66,6 +66,7 @@ class Transform:
         self.postposition.append(self.word[-jlen:])
 
     def append_verb(self, klen): #선어말이 있으면
+        self.word = self.word[:-klen]
         for m in self.hangul.preamal:
             mlen = len(m)
             if len(self.word)>=mlen and self.word[-mlen:] == m:

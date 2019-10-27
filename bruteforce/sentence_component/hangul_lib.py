@@ -37,7 +37,7 @@ class Hangul:
 
         #연결어미
         self.connection=[]
-        f = open(os.path.normpath(os.getcwd()+'/library/ef.csv'), 'r', encoding='utf-8')
+        f = open(os.path.normpath(os.getcwd()+'/library/ec.csv'), 'r', encoding='utf-8')
         rdr = csv.reader(f)
         for line in rdr:
             self.connection.append(line[0])
@@ -57,7 +57,7 @@ class Hangul:
 
         #종결어미
         self.endword=[]
-        f = open(os.path.normpath(os.getcwd()+'/library/ec.csv'), 'r', encoding='utf-8')
+        f = open(os.path.normpath(os.getcwd()+'/library/ef.csv'), 'r', encoding='utf-8')
         rdr = csv.reader(f)
         for line in rdr:
             self.endword.append(line[0])
