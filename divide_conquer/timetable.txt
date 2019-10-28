@@ -1,0 +1,40 @@
+// Psudocode
+
+definition of check(s, e, ct)
+    if s is e
+        checktime[s] = checktime[s] + 1
+        return
+    let mid = (s+e)/2 -> it must be integer (round down the float value)
+    check(s, mid, ct)
+    check(mid+1, e, ct)
+
+input the number of people (let's say p)
+for i in (list of numbers from 0 to p-1)
+    first, input the date (it can be "MON", "TUE", "WED", "THU", "FRI")
+    then input the timetable string (form of xxxx-xxxx) until newline come
+    change the timetable string to timestamp in 5 minute cut (ex. 0900 -> 0, 1030 -> 18, 2100 -> 144)
+    save timestamp by pair(start, end) at list (let's say t[i])
+
+for i in [0, 1, 2, 3, 4]
+    make list contains 145 zeros (let's say c)
+    for every person
+        for ts in t[]
+            check(ts.first, ts.second, c)
+
+    let start = -1
+    let g is list
+    for j in (list of numbers from 0 to 144)
+        if start is -1 and c[j] is 0
+            start = 0 if (j is 0) or j-1
+        if start is not -1 and c[j]>0
+            if j-start>=6
+                append start and j pair in g
+            start = -1
+    if start is -1 and 144-start>=6
+        append start and 144 pair in g
+
+    if g is not empty
+        first print day of the week according to i (ex. 0->MON, 2->WED)
+        for gg in g
+            print timestamp according to gg (ex. pair of 0, 12 -> print 0900-1000)
+        print newline
