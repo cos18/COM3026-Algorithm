@@ -69,7 +69,6 @@ int main(){
         }
     }
     findpath(finali, finalj, locate, ans);
-    cout << "<" << finali << ", " << finalj << ">" << endl;
     return 0;
 }
 
@@ -79,17 +78,19 @@ void findpath(int x, int y, int locate, int moving){
         return;
     }
     if(locate==1){
-        cout << "<" << x << ", " << y << "> -> ";
+        cout << "<1, 3> -> <" << x << ", " << y << ">";
         return;
     }
     for(int i=1;i<7;i++){
         for(int j=1;j<7;j++){
             if(dp[locate-1][i][j]==-1) continue;
             int dmove = moving-dp[locate-1][i][j];
-            if(dmove==panmove[i][map[locate]] || dmove==panmove[j][map[locate]]){
-                findpath(i, j, locate-1, moving-dmove);
-                if(moving!=ans) cout << "<" << x << ", " << y << "> -> ";
-                return;
+            if(i==x || j==y){
+                if(dmove==panmove[i][map[locate]] || dmove==panmove[j][map[locate]]){
+                    findpath(i, j, locate-1, moving-dmove);
+                    cout << " -> <" << x << ", " << y << ">";
+                    return;
+                }
             }
         }
     }

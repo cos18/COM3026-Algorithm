@@ -1,0 +1,48 @@
+// Psudocode
+
+how to print status of graduate:
+print major_nowunit, major_unit, gyo_nowunit, gyo_unit
+print major[1] and gyojic[1] pretty
+
+read file gyoil.txt in data folder and save string in list split by new line (we call g1)
+read file gyopil.txt in data folder and save string in list split by new line (we call g2)
+gyojic = [g1, g2]
+gyo_unit = 22
+gyo_nowunit = (size of g1 + size of g2 - 2)*2
+
+while true:
+    print "단일/복수전공 여부를 입력해주세요"
+    print "1은 단일전공, 2는 복수전공입니다."
+    input number and save at select
+    if select is 1 or 2:
+        major_unit = (if select is 1, 66 or 50)
+        break
+    print "잘못 입력하셨습니다. 다시 입력해주세요"
+
+while true:
+    print "학번을 입력해주세요."
+    print "예를 들어, 18학번은 18을 입력해주세요."
+    input number and save at hakbun
+    if number is NaN (not a number), print error and continue
+    if hakbun is lower then 17, make list major just like gyojic by using old txt files
+    else make list major just like gyojic by using new txt files
+    major_nowunit = major_unit - (32 - size of major)*3 + (if "상업정보교과논리논술" in major : 0 else 1)
+
+print status of graduate (define at top)
+
+while true:
+    input string and save at cmd
+    if cmd == status:
+        print status of graduate
+    else:
+        if cmd is in major or gyojic:
+            delete cmd in major or gyojic
+            calculate major_nowunit, gyo_nowunit
+            save major, gyojic in txt files
+            print status of graduate
+            if gyo_nowunit<=0 and major_nowunit<=0 and major[1] is empty and gyojic[1] is empty:
+                print "졸업!!"
+                break;
+        else:
+            print "잘못 입력하셨습니다. 다시 입력해주세요."
+            print "입력 가능한 문자열은 문제 조건을 확인해주세요."
