@@ -14,6 +14,8 @@ class Heap:
             locate = parent
     
     def pop(self):
+        if len(self.array)==0:
+            return -1
         locate = 0
         out = self.array[locate]
         self.array[locate] = self.array[len(self.array)-1]
@@ -82,12 +84,15 @@ while True:
     print('\n'+'='*12+'\n')
 
     if choice==1:
-        data = int(input("추가할 데이터를 입력하세요 (정수) : "))
+        data = int(input("추가할 데이터를 입력하세요 (자연수) : "))
         my_heap.insert(data)
         print("추가되었습니다.\n")
     elif choice==2:
         data = my_heap.pop()
-        print("삭제된 데이터는 {}입니다.\n".format(data))
+        if data == -1:
+            print("빈 힙이기 때문에 데이터를 꺼낼 수 없습니다.")
+        else:
+            print("삭제된 데이터는 {}입니다.\n".format(data))
     elif choice==3:
         my_heap.status()
     elif choice==4:
